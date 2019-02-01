@@ -1,0 +1,40 @@
+﻿@*@model OdeToFoodCore21.Models.Restaurant*@
+@*@using OdeToFoodCore21.Models*@
+@model Restaurant
+
+@{ 
+    ViewBag.Title = "Create";
+}
+<h1>Create</h1>
+
+@*The form will always post back to the same URL it came from so action="/" is not necessary (in Razor views I presume)*@
+@*<form action="/" method="post"> !/" borde vara sökvägen till action*@
+
+<form method="post">
+
+    @* asp-for kopplar till Name-property:n i Restaurant-klassen.
+        input vet att type="text" eftersom "Name" är av typen string*@
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    @* Vanlig HTML *@
+    @*<input type="text" name="Name" value="" />*@
+
+    @* TagHelper: bygg en <select> för Cuisine types *@
+    <div>
+        <label asp-for="Cuisine"></label>
+        <select asp-for="Cuisine"
+                asp-items="@Html.GetEnumSelectList<CuisineType>()"></select>
+        <span asp-validation-for="Cuisine"></span>
+    </div>
+    @* Vanlig HTML *@
+    @*<select>
+              <option value="value">text</option>
+        </select>*@
+
+    <input type="submit" name="save" value="Save" />
+</form>
+
+

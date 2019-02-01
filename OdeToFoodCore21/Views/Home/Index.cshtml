@@ -1,0 +1,40 @@
+﻿@*@model OdeToFoodCore21.ViewModels.HomeIndexViewModel*@
+@model HomeIndexViewModel
+@{
+    ViewBag.Title = "Home page";
+    //Layout = "~/Views/Shared/_Layout.cshtml"; flyttad till _ViewStart.cshtml
+}
+
+<h1>All Restaurants</h1>
+
+@foreach (var restaurant in Model.Restaurants)
+{
+    @Html.Partial("_Summary", restaurant)
+}
+
+@*<table> //Vi byter till en partial view istället
+    @foreach (var restaurant in Model.Restaurants)
+    {
+        <tr>
+            <td>@restaurant.Id</td>
+            <td>@restaurant.Name</td>
+            <td>
+                <!--det manuella sättet att sätta en länk-->
+                <a href="/home/details/@restaurant.Id">Details</a>
+                <!--det gamla sättet att sätta en länk, med HTML Helpers-->
+                @Html.ActionLink("Go", "Details", new { id=restaurant.Id})
+                <!--det nya sättet med Tag Helpers-->
+                <a asp-action="Details" asp-route-id="@restaurant.Id">More</a>
+                <a asp-page="/Restaurants/Edit" asp-route-id="@restaurant.Id">Edit</a>
+            </td>
+        </tr>
+    }
+</table>*@
+<div>
+    <a asp-action="Create">Add Restaurant</a>
+</div>
+@*<div>  //flyttad till _Layout.cshtml där ViewComponent GreeterViewComponent anropas
+    @section footer {
+        @Model.CurrentMessage
+}
+</div>*@
